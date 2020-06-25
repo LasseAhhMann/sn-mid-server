@@ -31,7 +31,7 @@ version: '3'
 services:
   midserver:
     container_name: sn-midserver
-    image: andrekosak/sn-midserver:kingston
+    image: lassekh/sn-mid-server:latest
     network_mode: host
     environment:
       - SN_INSTALL_URL=https://install.service-now.com/glide/distribution/builds/package/mid/2020/03/31/mid.orlando-12-11-2019__patch2-03-18-2020_03-31-2020_1417.linux.x86-64.zip
