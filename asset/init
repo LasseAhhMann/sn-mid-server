@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 set -e
 
 MID_HOME="/opt/agent"
@@ -18,8 +18,8 @@ checkConf () {
   if [ ! -e $CONF_FILE ]
     then
       echo "Downloading MID Server files"
-      wget -q --no-check-certificate ${SN_INSTALL_URL} -O /tmp/mid.zip
-      unzip -q -d /opt /tmp/mid.zip
+      wget --no-check-certificate ${SN_INSTALL_URL} -O /tmp/mid.zip
+      unzip -d /opt /tmp/mid.zip
       chmod 755 /opt/init
       chmod 755 /opt/fill-config-parameter
       rm -rf /tmp/*

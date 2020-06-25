@@ -1,14 +1,18 @@
-FROM alpine:3
+FROM debian:buster-slim
 
 LABEL maintainer="lkh@automize-software.com"
 
 ADD asset/* /opt/
 
-RUN apk update && apk add --no-cache unzip \
+RUN apt-get -q update && apt-get install -qy unzip \
     supervisor \
     xmlstarlet \
+    procps \
     wget && \
-    chmod 755 /opt/init
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    chmod 755 /opt/init && \
+    rm -rf /tmp/*
 
 ENTRYPOINT ["/opt/init"]
 
