@@ -22,8 +22,6 @@ RUN wget --no-check-certificate \
     chmod 755 /opt/init && \
     rm -rf /tmp/*
 
-EXPOSE 80 443
-
 ENTRYPOINT ["/opt/init"]
 
 CMD ["mid:start"]
