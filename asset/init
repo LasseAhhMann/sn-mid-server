@@ -6,25 +6,38 @@ CONF_FILE="${MID_HOME}/config.xml"
 CONF_FILE_ORIGIN="/opt/config.xml"
 
 # Mandatory ENV
+SN_INSTALL_URL=${SN_INSTALL_URL:-}
 SN_URL=${SN_URL:-}
 SN_USER=${SN_USER:-}
 SN_PASSWD=${SN_PASSWD:-}
 SN_MID_NAME=${SN_MID_NAME:-}
+SN_MID_SYS_ID=${SN_MID_SYS_ID:-}
+SN_KEYPAIRS_MID_ID=${SN_KEYPAIRS_MID_ID:-}
 
 checkConf () {
   if [ ! -e $CONF_FILE ]
     then
+      echo "Downloading MID Server files"
+      wget -q --no-check-certificate --show-progress ${SN_INSTALL_URL} -O /tmp/mid.zip
+      unzip -q -d /opt /tmp/mid.zip
+      chmod 755 /opt/init
+      chmod 755 /opt/fill-config-parameter
+      rm -rf /tmp/*
       cp $CONF_FILE_ORIGIN $CONF_FILE
       generateConf
   fi
 }
 
 generateConf () {
-  # Set config
-  sed 's/YOUR_MIDSERVER_NAME_GOES_HERE/'"${SN_MID_NAME}"'/' -i $CONF_FILE
-  sed 's/YOUR_INSTANCE_USER_NAME_HERE/'"${SN_USER}"'/' -i $CONF_FILE
-  sed 's/YOUR_INSTANCE_PASSWORD_HERE/'"${SN_PASSWD}"'/' -i $CONF_FILE
-  sed 's/YOUR_INSTANCE/'"${SN_URL}"'/' -i $CONF_FILE
+  # Setup config
+  echo "Generating config"
+  /opt/fill-config-parameter $CONF_FILE name ${SN_MID_NAME}
+  /opt/fill-config-parameter $CONF_FILE mid.instance.username ${SN_USER}
+  /opt/fill-config-parameter $CONF_FILE mid.instance.password ${SN_PASSWD}
+  /opt/fill-config-parameter $CONF_FILE url ${SN_URL}
+  /opt/fill-config-parameter $CONF_FILE mid_sys_id ${SN_MID_SYS_ID}
+  /opt/fill-config-parameter $CONF_FILE keypairs.mid_id ${SN_KEYPAIRS_MID_ID}
+
 }
 
 midStart () {
