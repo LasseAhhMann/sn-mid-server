@@ -4,10 +4,10 @@ LABEL maintainer="lkh@automize-software.com"
 
 ADD asset/* /opt/
 
-RUN apk update && apk add unzip \
+RUN apk update && apk add --no-cache unzip \
     supervisor \
     xmlstarlet \
-    vim \
+    bash \
     wget && \
     chmod 755 /opt/init
 
