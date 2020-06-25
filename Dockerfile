@@ -7,7 +7,6 @@ ADD asset/* /opt/
 RUN apk update && apk add --no-cache unzip \
     supervisor \
     xmlstarlet \
-    bash \
     wget && \
     chmod 755 /opt/init
 

@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
-set -ex
+#!/usr/bin/env sh
+set -e
 
 xmlstarlet edit \
     --inplace \

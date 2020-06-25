@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
-set -ex
+#!/usr/bin/env sh
+set -e
 
 MID_HOME="/opt/agent"
 CONF_FILE="${MID_HOME}/config.xml"
