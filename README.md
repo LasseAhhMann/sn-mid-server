@@ -1,7 +1,7 @@
-# docker ServiceNow MID Server
+# Docker ServiceNow MID Server
 
 This is a Dockerfile to set up "ServiceNow MID Server".
-The server is based on Ubuntu Linux.
+The server is based on Alpine Linux.
 Only ServiceNow version from New York release and onwards are supported.
 
 ## Build from docker file
